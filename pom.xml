@@ -1,0 +1,59 @@
+<!--
+  ~  This file is part of the noOp organization .
+  ~
+  ~  (c) Cyrille Lebeaupin <clebeaupin@noop.fr>
+  ~
+  ~  For the full copyright and license information, please view the LICENSE
+  ~  file that was distributed with this source code.
+  ~
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>fr.noop</groupId>
+  <artifactId>charset</artifactId>
+  <version>1.0.0-beta-1</version>
+  <packaging>jar</packaging>
+
+  <name>charset</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <main.class>fr.noop.charset.CharsetProvider</main.class>
+    <maven.build.timestamp.format>yyyy-MM-dd</maven.build.timestamp.format>
+    <timestamp>${maven.build.timestamp}</timestamp>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <!-- Build an executable JAR -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.5</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <mainClass>fr.noop.charset.CharsetProvider</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+    </plugins>
+
+  </build>
+
+</project>
