@@ -61,17 +61,4 @@ public class CharsetProvider extends java.nio.charset.spi.CharsetProvider {
     public Iterator charsets() {
         return charsets.iterator();
     }
-
-    public static void main(String[] args) {
-        String testString = "Ğîlot";
-
-        try {
-            byte[] testBytes = testString.getBytes("ISO-6937");
-            System.out.format(">>>>>>>>>>> %x %x %x %x", testBytes[0], testBytes[1], testBytes[2], testBytes[3]);
-        } catch (UnsupportedEncodingException e) {
-            System.out.println(e.getMessage());
-        }
-
-        System.out.println(testString);
-    }
 }
