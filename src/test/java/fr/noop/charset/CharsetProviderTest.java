@@ -15,14 +15,17 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 import fr.noop.charset.iso6937.Iso6937Charset;
-import junit.framework.TestCase;
+
+import static org.junit.Assert.*;
+import org.junit.*;
 
 /**
  * Created by clebeaupin on 28/09/15.
  */
-public class CharsetProviderTest  extends TestCase {
+public class CharsetProviderTest {
     private CharsetProvider tested = new CharsetProvider();
 
+    @Test
     public void testIso6937() throws Exception {
         Charset charset = tested.charsetForName("ISO-6937");
         assertNotNull("charset not found", charset);
@@ -31,10 +34,12 @@ public class CharsetProviderTest  extends TestCase {
         assertEquals(charset, tested.charsetForName("ISO-6937-2"));
     }
 
+    @Test
     public void testNotHere() throws Exception {
         assertNull(tested.charsetForName("X-DOES-NOT-EXIST"));
     }
 
+    @Test
     public void testIterator() throws Exception {
         Iterator iterator = tested.charsets();
         HashSet found = new HashSet();

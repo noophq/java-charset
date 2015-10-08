@@ -10,9 +10,6 @@
 
 package fr.noop.charset.iso6937;
 
-import fr.noop.charset.iso6937.Iso6937Charset;
-import junit.framework.TestCase;
-
 import javax.xml.bind.DatatypeConverter;
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
@@ -20,20 +17,23 @@ import java.nio.CharBuffer;
 import java.nio.charset.CharacterCodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
-import java.util.Arrays;
+
+import static org.junit.Assert.*;
+import org.junit.*;
 
 /**
  * Created by clebeaupin on 29/09/15.
  */
-public class Iso6937CharsetDecoderTest extends TestCase {
-    private CharsetDecoder tested;
+public class Iso6937CharsetDecoderTest {
+    public CharsetDecoder tested;
 
-    protected void setUp() throws Exception {
+    @Before
+    public void setUp() throws Exception {
         Charset charset = new Iso6937Charset("ISO-6937", new String[] {});
         tested = charset.newDecoder();
     }
 
-    protected String decodeBytes(byte[] bytes) throws UnsupportedEncodingException {
+    public String decodeBytes(byte[] bytes) throws UnsupportedEncodingException {
         ByteBuffer bb = ByteBuffer.wrap(bytes);
 
         try {
@@ -44,15 +44,17 @@ public class Iso6937CharsetDecoderTest extends TestCase {
         }
     }
 
-    protected String decode(String in) throws UnsupportedEncodingException {
+    public String decode(String in) throws UnsupportedEncodingException {
         return decodeBytes(in.getBytes());
     }
 
+    @Test
     public void testAscii() throws UnsupportedEncodingException {
         assertEquals("abcdefghijklmnopqrstuvwxyz", decode("abcdefghijklmnopqrstuvwxyz"));
         assertEquals("ABCDEFGHIJKLMNOPQRSTUVWXYZ", decode("ABCDEFGHIJKLMNOPQRSTUVWXYZ"));
     }
 
+    @Test
     public void testGraveAccent() throws UnsupportedEncodingException {
         assertEquals("À", decodeBytes(DatatypeConverter.parseHexBinary("c141")));
         assertEquals("È", decodeBytes(DatatypeConverter.parseHexBinary("c145")));
@@ -66,6 +68,7 @@ public class Iso6937CharsetDecoderTest extends TestCase {
         assertEquals("ù", decodeBytes(DatatypeConverter.parseHexBinary("c175")));
     }
 
+    @Test
     public void testAcuteAccent() throws UnsupportedEncodingException {
         assertEquals("Á", decodeBytes(DatatypeConverter.parseHexBinary("c241")));
         assertEquals("Ć", decodeBytes(DatatypeConverter.parseHexBinary("c243")));
@@ -93,6 +96,7 @@ public class Iso6937CharsetDecoderTest extends TestCase {
         assertEquals("ź", decodeBytes(DatatypeConverter.parseHexBinary("c27a")));
     }
 
+    @Test
     public void testCircumflexAccent() throws UnsupportedEncodingException {
         assertEquals("Â", decodeBytes(DatatypeConverter.parseHexBinary("c341")));
         assertEquals("Ĉ", decodeBytes(DatatypeConverter.parseHexBinary("c343")));
@@ -120,6 +124,7 @@ public class Iso6937CharsetDecoderTest extends TestCase {
         assertEquals("ŷ", decodeBytes(DatatypeConverter.parseHexBinary("c379")));
     }
 
+    @Test
     public void testTildeAccent() throws UnsupportedEncodingException {
         assertEquals("Ã", decodeBytes(DatatypeConverter.parseHexBinary("c441")));
         assertEquals("Ĩ", decodeBytes(DatatypeConverter.parseHexBinary("c449")));
@@ -133,6 +138,7 @@ public class Iso6937CharsetDecoderTest extends TestCase {
         assertEquals("ũ", decodeBytes(DatatypeConverter.parseHexBinary("c475")));
     }
 
+    @Test
     public void testMacronAccent() throws UnsupportedEncodingException {
         assertEquals("Ā", decodeBytes(DatatypeConverter.parseHexBinary("c541")));
         assertEquals("Ē", decodeBytes(DatatypeConverter.parseHexBinary("c545")));
@@ -146,6 +152,7 @@ public class Iso6937CharsetDecoderTest extends TestCase {
         assertEquals("ū", decodeBytes(DatatypeConverter.parseHexBinary("c575")));
     }
 
+    @Test
     public void testBreveAccent() throws UnsupportedEncodingException {
         assertEquals("Ă", decodeBytes(DatatypeConverter.parseHexBinary("c641")));
         assertEquals("Ğ", decodeBytes(DatatypeConverter.parseHexBinary("c647")));
@@ -155,6 +162,7 @@ public class Iso6937CharsetDecoderTest extends TestCase {
         assertEquals("ŭ", decodeBytes(DatatypeConverter.parseHexBinary("c675")));
     }
 
+    @Test
     public void testDotAccent() throws UnsupportedEncodingException {
         assertEquals("Ċ", decodeBytes(DatatypeConverter.parseHexBinary("c743")));
         assertEquals("Ė", decodeBytes(DatatypeConverter.parseHexBinary("c745")));
@@ -167,6 +175,7 @@ public class Iso6937CharsetDecoderTest extends TestCase {
         assertEquals("ż", decodeBytes(DatatypeConverter.parseHexBinary("c77a")));
     }
 
+    @Test
     public void testUmlautAccent() throws UnsupportedEncodingException {
         assertEquals("Ä", decodeBytes(DatatypeConverter.parseHexBinary("c841")));
         assertEquals("Ë", decodeBytes(DatatypeConverter.parseHexBinary("c845")));
@@ -182,6 +191,7 @@ public class Iso6937CharsetDecoderTest extends TestCase {
         assertEquals("ÿ", decodeBytes(DatatypeConverter.parseHexBinary("c879")));
     }
 
+    @Test
     public void testRingAccent() throws UnsupportedEncodingException {
         assertEquals("Å", decodeBytes(DatatypeConverter.parseHexBinary("ca41")));
         assertEquals("Ů", decodeBytes(DatatypeConverter.parseHexBinary("ca55")));
@@ -189,6 +199,7 @@ public class Iso6937CharsetDecoderTest extends TestCase {
         assertEquals("ů", decodeBytes(DatatypeConverter.parseHexBinary("ca75")));
     }
 
+    @Test
     public void testCedillaAccent() throws UnsupportedEncodingException {
         assertEquals("Ç", decodeBytes(DatatypeConverter.parseHexBinary("cb43")));
         assertEquals("Ģ", decodeBytes(DatatypeConverter.parseHexBinary("cb47")));
@@ -208,6 +219,7 @@ public class Iso6937CharsetDecoderTest extends TestCase {
         assertEquals("ţ", decodeBytes(DatatypeConverter.parseHexBinary("cb74")));
     }
 
+    @Test
     public void testDoubleAcuteAccent() throws UnsupportedEncodingException {
         assertEquals("Ő", decodeBytes(DatatypeConverter.parseHexBinary("cd4f")));
         assertEquals("Ű", decodeBytes(DatatypeConverter.parseHexBinary("cd55")));
@@ -215,6 +227,7 @@ public class Iso6937CharsetDecoderTest extends TestCase {
         assertEquals("ű", decodeBytes(DatatypeConverter.parseHexBinary("cd75")));
     }
 
+    @Test
     public void testOgonekAccent() throws UnsupportedEncodingException {
         assertEquals("Ą", decodeBytes(DatatypeConverter.parseHexBinary("ce41")));
         assertEquals("Ę", decodeBytes(DatatypeConverter.parseHexBinary("ce45")));
@@ -226,6 +239,7 @@ public class Iso6937CharsetDecoderTest extends TestCase {
         assertEquals("ų", decodeBytes(DatatypeConverter.parseHexBinary("ce75")));
     }
 
+    @Test
     public void testCaronAccent() throws UnsupportedEncodingException {
         assertEquals("Č", decodeBytes(DatatypeConverter.parseHexBinary("cf43")));
         assertEquals("Ď", decodeBytes(DatatypeConverter.parseHexBinary("cf44")));
@@ -247,6 +261,7 @@ public class Iso6937CharsetDecoderTest extends TestCase {
         assertEquals("ž", decodeBytes(DatatypeConverter.parseHexBinary("cf7a")));
     }
 
+    @Test
     public void testSpecialChars() throws UnsupportedEncodingException {
         assertEquals("¤", decodeBytes(DatatypeConverter.parseHexBinary("a8")));
         assertEquals("®", decodeBytes(DatatypeConverter.parseHexBinary("d2")));
@@ -256,6 +271,4 @@ public class Iso6937CharsetDecoderTest extends TestCase {
         assertEquals("ª", decodeBytes(DatatypeConverter.parseHexBinary("e3")));
         assertEquals("\u00ad", decodeBytes(DatatypeConverter.parseHexBinary("ff")));
     }
-    
-    
 }
